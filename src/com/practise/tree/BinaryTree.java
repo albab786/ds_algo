@@ -29,6 +29,8 @@ public class BinaryTree {
         tree.root.left.right = new Node(5);
         tree.root.right.right = new Node(6);
         preorderTraversal(tree.root);
+        postOrderTraversal(tree.root);
+        inOrderTraversal(tree.root);
 
     }
     public static void preorderTraversal(Node node){
@@ -37,5 +39,21 @@ public class BinaryTree {
             preorderTraversal(node.left);
             preorderTraversal(node.right);
         }
+    }
+    public static void postOrderTraversal(Node node){
+        if(node==null){
+            return;
+        }
+        postOrderTraversal(node.left);
+        postOrderTraversal(node.right);
+        System.out.print(node.data + " ");
+    }
+    public static void inOrderTraversal(Node node){
+        if(node==null){
+            return;
+        }
+        inOrderTraversal(node.left);
+        System.out.print(node.data+ " ");
+        inOrderTraversal(node.right);
     }
 }
