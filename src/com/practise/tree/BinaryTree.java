@@ -1,7 +1,13 @@
 package com.practise.tree;
 
 
- class Node{
+import javax.swing.tree.TreeNode;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+
+class Node{
     int data;
     Node left;
     Node right;
@@ -9,9 +15,10 @@ package com.practise.tree;
         data = value;
         left = right = null;
     }
+
 }
 public class BinaryTree {
-    Node root;
+    static  Node root;
 
     BinaryTree() {
         root = null;
@@ -28,9 +35,11 @@ public class BinaryTree {
         tree.root.left.left = new Node(4);
         tree.root.left.right = new Node(5);
         tree.root.right.right = new Node(6);
-        preorderTraversal(tree.root);
-        postOrderTraversal(tree.root);
-        inOrderTraversal(tree.root);
+//        preorderTraversal(tree.root);
+//        postOrderTraversal(tree.root);
+//        inOrderTraversal(tree.root);
+    //    iterativePreorder(tree.root);
+        System.out.println(maxDepth(tree.root));
 
     }
     public static void preorderTraversal(Node node){
@@ -56,4 +65,36 @@ public class BinaryTree {
         System.out.print(node.data+ " ");
         inOrderTraversal(node.right);
     }
+  public  static void iterativePreorder(Node node){
+        if(node==null){
+            return;
+        }
+      Stack<Node> st=new Stack<Node>();
+        st.push(root);
+      while (st.empty() == false) {
+
+          // Pop the top item from stack and print it
+          Node mynode = st.peek();
+          System.out.print(mynode.data + " ");
+          st.pop();
+
+          // Push right and left children of the popped node to stack
+          if (mynode.right != null) {
+              st.push(mynode.right);
+          }
+          if (mynode.left != null) {
+              st.push(mynode.left);
+          }
+      }
+  }
+  static int maxDepth(Node node){
+        if(node==null){
+            return 0;
+        }
+        int left=maxDepth(node.left);
+        int right=maxDepth(node.right);
+        return Math.max(left,right)+1;
+  }
+
+
 }
